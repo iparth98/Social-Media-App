@@ -1,0 +1,15 @@
+{% load i18n humanize  %}
+<br>
+<div class="card">
+  <div class="card-header">
+      <img class="rounded-circle" src="{{ answer.user.profile.image.url }}" style="height:65px; width:65px;">
+      <a class="mr-2" href="#" style="margin-left:5px;">{{ answer.user.username }}</a>
+      <div style="margin-left:75px; margin-top:-20px; font-size:12px;">work as software developer</div>
+  </div>
+  <div class="card-body">
+    <blockquote class="blockquote mb-0">
+      <p>{{ answer }}</p>
+      <footer class="blockquote-footer">answered {{ answer.timestamp|naturaltime  }}</footer>
+    </blockquote>
+  </div>
+</div>

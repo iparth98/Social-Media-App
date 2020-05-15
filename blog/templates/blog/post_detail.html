@@ -1,0 +1,37 @@
+{% extends "blog/base.html" %}
+{% block content %}
+      <!-- Title -->
+      <h1 class="mt-4" style="font-family: Georgia">{{post.title}}</h1>
+
+      <!-- Author  kya ker rhai hai?sab proper kar rahi thihahaha -->
+      <p class="lead">
+        by
+  <a href="#">{{ post.author }}</a>
+  {% if object.author == user %}
+    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Update</a>
+    <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
+  {% endif %}
+</p>
+
+<hr>
+
+<!-- Date/Time -->
+<p>{{ post.date_posted }}</p>
+
+<hr>
+
+<!-- Preview Image -->
+<img class="img-fluid" src="{{ post.image.url }}" alt="Image Not Found" style="width:600px; height:300px;">
+
+<hr>
+
+<!-- Post Content -->
+<p class="lead">{{ post.content }}</p>
+<blockquote class="blockquote">
+  <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+  <footer class="blockquote-footer">Written by
+    <cite title="Source Title">{{ post.author }}</cite>
+  </footer>
+</blockquote>
+<hr>
+{% endblock %}

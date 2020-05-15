@@ -1,0 +1,27 @@
+{% extends 'blog/base.html' %}
+{% load static i18n %}
+{% load crispy_forms_tags %}
+
+{% block title %}{% trans 'Ask a question' %}{% endblock %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+   <ol class="breadcrumb">
+     <li class="breadcrumb-item"><a href="{% url 'index_noans'%}">{% trans 'Home' %}</a></li>
+     <li class="breadcrumb-item"><a href="{% url 'index_all' %}">{% trans 'Q&A' %}</a></li>
+     <li class="breadcrumb-item active" aria-current="page">{% trans 'Ask a question' %}</li>
+   </ol>
+ </nav>
+
+  <form action="" method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <div class="form-group">
+      <br>
+      <button id="publish" type="submit" class="btn btn-primary">{% trans 'Publish' %}</button>
+      <a href="{% url 'index_all' %}" class="btn btn-default">{% trans 'Cancel' %}</a>
+    </div>
+  </form>
+  <!-- {{ form.media }} -->
+
+{% endblock content %}

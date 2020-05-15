@@ -1,0 +1,93 @@
+{% extends "blog/base.html" %}
+{% load humanize i18n static humanize %}
+{% block content %}
+<style media="screen">
+
+.article-title {
+color: #444444;
+}
+
+a.article-title:hover {
+color: #428bca;
+text-decoration: none;
+}
+
+.article-content {
+white-space: pre-line;
+}
+
+.article-img {
+height: 65px;
+width: 65px;
+margin-right: 16px;
+}
+
+.article-metadata {
+padding-bottom: 1px;
+margin-bottom: 4px;
+border-bottom: 1px solid #e3e3e3
+}
+
+.article-metadata a:hover {
+color: #333;
+text-decoration: none;
+}
+
+.article-svg {
+width: 25px;
+height: 25px;
+vertical-align: middle;
+}
+
+.account-img {
+height: 125px;
+width: 125px;
+margin-right: 20px;
+margin-bottom: 16px;
+}
+
+.account-heading {
+font-size: 2.5rem;
+}
+
+</style>
+<script>
+function relocate_home()
+{
+     location.href = "{% url 'propose-answer' question.id %}";
+}
+</script>
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb">
+<li class="breadcrumb-item"><a href="{% url 'index_noans'%}">{% trans 'Home' %}</a></li>
+<li class="breadcrumb-item"><a href="{% url 'index_noans' %}">{% trans 'Q.A' %}</a></li>
+<li class="breadcrumb-item active" aria-current="page">{{ question.title }}</li>
+</ol>
+</nav>
+    <article class="media content-section">
+       <img class="rounded-circle article-img" src="{{ user.profile.image.url }}" style="height: 65px; width: 65px;">
+       <div class="media-body">
+         <div class="article-metadata">
+           <a class="mr-2" href="#">{{ question.user }}</a>
+           <small class="text-muted">{{ question.timestamp|naturaltime }}</small>
+         </div>
+         <h2 class="article-title">{{ question.title }}</h2>
+         <p class="article-content">{{ object.content }}</p>
+       </div>
+     </article>
+     <h4 style="font-family:Georgia,serif;">Answers</h4>
+     <button type="submit" class="btn btn-outline-primary" onclick=" relocate_home()">Post Your Answer</button>
+    <div class="row">
+      <ul class="col-md-12">
+        {% for answer in question.answer_set.all %}
+          {% include 'qa/answer_sample.html' with answer=answer %}
+        {% empty %}
+          <div class="">
+            <h4>{% trans 'There are no answers yet.' %}</h4>
+            <p>{% trans 'Submit your answer now.' %}</p>
+          </div>
+        {% endfor %}
+      </ul>
+    </div>
+<br>
+{% endblock %}

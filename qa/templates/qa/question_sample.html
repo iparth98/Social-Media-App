@@ -1,0 +1,16 @@
+{% load humanize i18n static humanize %}
+<br>
+<div class="card" style="width:700px;">
+<h5><div class="card-header">
+    <a href="{% url 'question_detail' question.pk %}" style="text-decoration:none; color:black; font-family: Helvetica;">{{ question.title }}</a>
+  </div></h5>
+  <div class="card-body">
+      <p>{{ question.content }}</p>
+    <p class="card-text">
+      <div class="question-user pull-right">
+        <span class="text-secondary">{% trans 'Asked' %} {{ question.timestamp|naturaltime }} {% trans 'by' %}</span>
+        <a href="#">{{ question.user|title }}</a>
+      </div>
+    </p>
+  </div>
+</div>
